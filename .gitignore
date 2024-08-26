@@ -1,3 +1,4 @@
 .env
 data/pdfs
 data/modified_pdfs
+data/extracted_data
