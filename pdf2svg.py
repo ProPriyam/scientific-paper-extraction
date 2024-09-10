@@ -41,6 +41,6 @@ def process_pdfs(input_folder, output_folder):
 
 
 # Usage
-input_folder = "data/cropped_pdfs"  # Replace with your input folder path
-output_folder = "data/svgs"  # Replace with your output folder path
+input_folder = "data/cropped_pdfs"
+output_folder = "data/svgs"
 process_pdfs(input_folder, output_folder)
