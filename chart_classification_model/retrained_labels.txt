@@ -1,0 +1,15 @@
+area
+heatmap
+horizontal bar
+horizontal interval
+line
+manhattan
+map
+pie
+scatter
+scatter line
+surface
+venn
+vertical bar
+vertical box
+vertical interval

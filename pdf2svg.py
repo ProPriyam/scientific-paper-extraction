@@ -24,7 +24,7 @@ def convert_pdf_to_svg(pdf_path, svg_path):
     except subprocess.CalledProcessError as e:
         print(f"Error converting {pdf_path}: {str(e)}")
 
-def process_pdfs(input_folder, output_folder):
+def process_pdfs(input_folder, output_folder, isline_folder):
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
@@ -33,14 +33,21 @@ def process_pdfs(input_folder, output_folder):
             pdf_path = os.path.join(input_folder, filename)
             try:
                 if check_pdf_for_vector_graphics(pdf_path):
-                    svg_filename = os.path.splitext(filename)[0] + '.svg'
-                    svg_path = os.path.join(output_folder, svg_filename)
-                    convert_pdf_to_svg(pdf_path, svg_path)
+                    base_name = os.path.splitext(filename)[0]
+                    jpg_filename = f"{base_name}.jpg"
+                    jpg_path = os.path.join(isline_folder, jpg_filename)
+                    
+                    if os.path.exists(jpg_path):
+                        svg_filename = f"{base_name}.svg"
+                        svg_path = os.path.join(output_folder, svg_filename)
+                        convert_pdf_to_svg(pdf_path, svg_path)
+                    else:
+                        print(f"Skipping {filename} as no corresponding JPG found in isLine folder")
             except Exception as e:
                 print(f"Error processing {filename}: {str(e)}")
-
 
 # Usage
 input_folder = "data/cropped_pdfs"
 output_folder = "data/svgs"
-process_pdfs(input_folder, output_folder)
+isline_folder = "data/isLine"  # Adjust this path if necessary
+process_pdfs(input_folder, output_folder, isline_folder)
