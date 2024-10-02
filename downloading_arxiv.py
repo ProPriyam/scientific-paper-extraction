@@ -6,37 +6,36 @@ import requests
 
 dotenv.load_dotenv()
 
-def save_random_lines(input_file_path, output_file_path, num_lines=100):
+def save_all_econ_lines(input_file_path, output_file_path):
     try:
         with open(input_file_path, 'r') as file:
             lines = file.readlines()
 
-        # Filter lines for those that are in the selected category - (econonmics in this case)
+        # Filter lines for those that are in the selected category - (economics in this case)
         econ_lines = [line for line in lines if '"categories":' in line and ('"econ' in line or '"q-fin' in line)]
 
-        if len(econ_lines) < num_lines:
-            print(f"The file contains only {len(econ_lines)} economics lines, which is less than the requested {num_lines} lines.")
-            selected_lines = econ_lines
-        else:
-            selected_lines = random.sample(econ_lines, num_lines)
-
         # Convert selected lines to JSON
-        json_objects = [json.loads(line) for line in selected_lines]
+        json_objects = [json.loads(line) for line in econ_lines]
 
         with open(output_file_path, 'w') as output_file:
             json.dump(json_objects, output_file, indent=4)
 
-        print(f"Random {num_lines} economics lines saved to {output_file_path}")
+        print(f"All {len(econ_lines)} economics lines saved to {output_file_path}")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 # Save usage
 input_file_path = os.getenv("path_arxiv")
-output_file_path = 'data/random100_econ.json'
-save_random_lines(input_file_path, output_file_path, num_lines=100)
+output_file_path = 'data/econ.json'
+
+# Check if the file already exists
+if os.path.exists(output_file_path):
+    print(f"The file {output_file_path} already exists. Skipping creation.")
+else:
+    save_all_econ_lines(input_file_path, output_file_path)
 
 # Open the file and read its contents
-with open("data/random100_econ.json", "r") as file:
+with open(output_file_path, "r") as file:
     data = json.load(file)
 
 # Extract 'id' field from each entry and store in a list
