@@ -27,8 +27,4 @@ Step 5:
 Step 6:
 -> Modify directories in the code below before running.
 
-`sbt "runMain org.allenai.pdffigures2.FigureExtractorBatchCli /path/to/pdf_directory/ -s /output/folder/stat_file.json -m /output/folder/image_prefix -d /output/folder/data_prefix"`
-
-sbt "runMain org.allenai.pdffigures2.FigureExtractorBatchCli /projects/bdata/llm_for_timeseries/scientific-paper-extraction/data/modified_pdfs/ -s stat_file.json -m /projects/bdata/llm_for_timeseries/scientific-paper-extraction/data/image_extraction/image_prefix -d /projects/bdata/llm_for_timeseries/scientific-paper-extraction/data/stats_extraction/data_prefix"
-
-find /projects/bdata/llm_for_timeseries/scientific-paper-extraction/data -name "*.json" -type f -exec cp {} /projects/bdata/llm_for_timeseries/scientific-paper-extraction/data/stats_image_extraction/ \; -exec rm {} +
+`sbt "runMain org.allenai.pdffigures2.FigureExtractorBatchCli /path/to/pdf_directory/ -s /output/folder/stat_file.json -m /output/folder/ -d /output/folder/"`
