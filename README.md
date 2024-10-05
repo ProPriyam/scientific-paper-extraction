@@ -5,7 +5,7 @@ Follow the following step to run the pipeline in its entirity.
 4. crop2pdf.py
 5. isLine.py
 
-6. Install pdf2svg (https://github.com/dawbarton/pdf2svg)
-7. Run pdf2svg (It also matches IDs with isLine)
+6. conda install -c conda-forge pdf2svg
+7. Run pdf2svg.py (It also matches IDs with isLine)
 
 8. svg2time_series.py (still pending)
